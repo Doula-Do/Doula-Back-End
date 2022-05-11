@@ -1,0 +1,30 @@
+{
+  "name": "doula-back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start" : "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Doula-Do/Doula-Back-End.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Doula-Do/Doula-Back-End/issues"
+  },
+  "homepage": "https://github.com/Doula-Do/Doula-Back-End#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "knex": "^2.0.0",
+    "moment": "^2.29.3",
+    "nodemon": "^2.0.16",
+    "pg": "^8.7.3"
+  }
+}
