@@ -1,6 +1,12 @@
 const db = require("../db/db");
 
 class doulaModels {
+  static async getAllUsers() {
+    const sql = "SELECT * from users";
+    const dbResults = await pool.query(sql);
+    return dbResults.rows;
+  }
+
   static async getAllPost() {
     const sql = "SELECT * from posts ORDER BY id";
     const dbResults = await pool.query(sql);

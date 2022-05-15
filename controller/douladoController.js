@@ -1,6 +1,21 @@
 const doulaModels = require('../models/douladoModels');
 const pool = require("../db/db");
 
+
+async function fetchUsers(req, res) {
+  try {
+    const data = await doulaModels.getAllUsers();
+    res.json({
+      data,
+    });
+  } catch (err) {
+    res.status(500);
+    res.json({
+      message: err.message,
+    });
+  }
+}
+
 async function fetchPost(req, res) {
     try {
       const data = await doulaModels.getAllPost();
@@ -41,6 +56,7 @@ async function fetchPost(req, res) {
 
 
 module.exports = {
+    fetchUsers,
     fetchPost,
     makeAPost
 }
