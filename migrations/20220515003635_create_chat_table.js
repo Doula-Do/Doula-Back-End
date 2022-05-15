@@ -4,13 +4,11 @@
  */
 exports.up = function(knex) {
     return knex.schema
-    .createTable('posts', function (table) {
-
-        table.increments();
-        table.integer('user_id').notNullable().references('id').inTable('users').index();
+    .createTable('chat', function (table) {
+        table.increments('id').primary();
+        table.integer('user_id').notNullable().references('id').inTable('users');
         table.text('content').nullable;
         table.timestamp(true,true).defaultTo(knex.fn.now())
-
     });
 };
 
@@ -19,5 +17,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-    return knex.schema.dropTable('posts');
+    return knex.schema.dropTable('chat');
 };

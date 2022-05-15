@@ -5,7 +5,9 @@
 exports.up = function(knex) {
     return knex.schema
     .createTable('users', function (table) {
-        table.increments('user_id').primary();
+
+        table.increments();
+
         table.string('first_name').notNullable();
         table.string('last_name').notNullable();
         table.date('birthday').notNullable();
@@ -15,11 +17,12 @@ exports.up = function(knex) {
         table.string('Partner_last_name').nullable();
         table.string('gender').notNullable();
         table.boolean('medicaid').notNullable();
-        table.string('zipcode').notNullable();
+
+        table.integer('zipcode').unique();
         table.boolean('is_doula').notNullable();
         table.string('phone_number');
         table.boolean('need_Doula').nullable();
-        table.string('birthing_center').nullable();
+
         table.string('birth_preference').nullable();
         table.date('due_date').nullable();
         table.string('baby_gender').nullable();
