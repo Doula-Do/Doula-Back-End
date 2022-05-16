@@ -15,7 +15,7 @@ exports.up = function(knex) {
         table.string('Partner_last_name').nullable();
         table.string('gender').notNullable();
         table.boolean('medicaid').notNullable();
-        table.integer('zipcode').unique();
+        table.integer('zipcode')
         table.boolean('is_doula').notNullable();
         table.string('phone_number');
         table.boolean('need_Doula').nullable();
