@@ -3,8 +3,6 @@ const pool = require("../db/db_pool");
 
 class doulaModels {
 
-<<<<<<< Updated upstream
-=======
   // static async loginUser (){
   //   const sql = "SELECT * FROM users WHERE email = $1 AND password = $2"
   //   const dbResults = await pool.query(sql, [email, password])
@@ -12,7 +10,6 @@ class doulaModels {
   // }
 
 
->>>>>>> Stashed changes
   static async getAllUsers() {
     const sql = "SELECT * from users";
     const dbResults = await pool.query(sql);
