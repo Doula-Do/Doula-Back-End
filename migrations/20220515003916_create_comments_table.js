@@ -5,7 +5,7 @@
 exports.up = function(knex) {
     return knex.schema
     .createTable('comments', function (table) {
-        table.increments('id').primary();
+        table.increments();
         table.integer('posts_id').notNullable().references('id').inTable('posts').onDelete('CASCADE').index();
         table.integer('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').index();
         table.text('content');

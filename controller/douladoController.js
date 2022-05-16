@@ -1,6 +1,20 @@
 const doulaModels = require('../models/douladoModels');
 const pool = require("../db/db");
 
+// async function fetchUserLogin(req, res) {
+//   try {
+//     const data = await doulaModels.loginUser();
+//     res.json({
+//       data,
+//     });
+//   } catch (err) {
+//     res.status(500);
+//     res.json({
+//       message: "wrong email/password",
+//     });
+//   }
+// }
+
 
 async function fetchUsers(req, res) {
   try {

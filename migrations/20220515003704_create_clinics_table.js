@@ -5,11 +5,11 @@
 exports.up = function(knex) {
     return knex.schema
     .createTable('clinic', function (table) {
-        table.increments('id').primary();
+        table.increments();
         table.string('clinic_name').nullable;
         table.integer('phone_number').nullable;
         table.string('address').nullable;
-        table.integer('clinic_zipcode_foreign').references('zipcode').inTable('users');
+        table.integer('zipcode').references('zipcode').inTable('users');
     });
 };
 

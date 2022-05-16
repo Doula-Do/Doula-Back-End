@@ -1,6 +1,6 @@
 const router = require('express').Router(); 
 const pool = require('../db/db')
-const { fetchUsers, fetchPost, makeAPost }  = require('../controller/douladoController');
+const {fetchUsers, userLogin, fetchPost, makeAPost }  = require('../controller/douladoController');
 
 var Pool = require('pg').Pool;
 
@@ -14,6 +14,7 @@ var pool = new Pool({
 
   router.get('/users', fetchUsers)
   
+<<<<<<< Updated upstream
   router.post('/login', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
@@ -31,6 +32,20 @@ var pool = new Pool({
         }
       })
     })
+=======
+  router.post('/login', async( req, res) =>{
+    try{
+      const{email,password} = req.body;
+      const user = await pool.query("SELECT * FROM users WHERE email = $1 AND password = $2", [email, password]) 
+
+      if(user.rows.length === 0){
+       return res.status(401).json("email or password is incorrect")
+      }
+    } catch (error){
+      console.log
+    }
+  })
+>>>>>>> Stashed changes
 
   router.get('/post', fetchPost)
 

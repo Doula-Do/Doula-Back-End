@@ -5,12 +5,10 @@
 exports.up = function(knex) {
     return knex.schema
     .createTable('posts', function (table) {
-
-        table.increments();
-        table.integer('user_id').notNullable().references('id').inTable('users').index();
+        table.increments().unique();
+        table.integer('user_id').notNullable().references('id').inTable('users').unique();
         table.text('content').nullable;
         table.timestamp(true,true).defaultTo(knex.fn.now())
-
     });
 };
 
