@@ -1,6 +1,7 @@
 const db = require("../db/db");
 
 class doulaModels {
+
   static async getAllUsers() {
     const sql = "SELECT * from users";
     const dbResults = await pool.query(sql);
