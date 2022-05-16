@@ -1,6 +1,6 @@
 const router = require('express').Router(); 
-// const pool = require('../db/db')
-const { fetchPost, makeAPost }  = require('../controller/douladoController');
+const pool = require('../db/db')
+const { fetchUsers, fetchPost, makeAPost }  = require('../controller/douladoController');
 
 var Pool = require('pg').Pool;
 
@@ -12,9 +12,7 @@ var pool = new Pool({
     port: 5432,
 });
 
-router.get('/', (req, res) => {
-    res.send('Hello World!')
-  })
+  router.get('/users', fetchUsers)
   
   router.post('/login', (req, res) => {
     let email = req.body.email;

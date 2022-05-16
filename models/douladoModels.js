@@ -1,4 +1,4 @@
-const db = require("../db/db");
+const pool = require("../db/db_pool");
 
 class doulaModels {
 
