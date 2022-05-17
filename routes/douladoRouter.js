@@ -1,14 +1,25 @@
 const router = require('express').Router(); 
-const {fetchUsers, userLogin, fetchPost, makeAPost }  = require('../controller/douladoController');
+const {fetchUsers, userLogin, fetchPosts, makeAPost, updatePost, getPost, deletePost }  = require('../controller/douladoController');
 
-  router.get('/users', fetchUsers)
-  
-  router.post('/login', userLogin)
+//gets all users
+router.get('/users', fetchUsers);
 
-  router.get('/post', fetchPost)
+//logs in
+router.post('/login', userLogin);
 
-  router.post('/post', makeAPost)
+//gets all posts
+router.get('/posts', fetchPosts);
 
-  router.put('/post/:id')
+//gets single post
+router.get('/post/:id', getPost)
+
+//creates a post
+router.post('/post', makeAPost);
+
+//update a post
+router.put('/post/:id', updatePost);
+
+//delete a post
+router.delete('/post/:id', deletePost);
 
 module.exports = router;

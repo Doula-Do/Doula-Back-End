@@ -5,9 +5,9 @@
  */
 module.exports = {
   development: {
-    client: 'postgres',
+    client: 'postgresql',
     connection: {
-      database: 'doulasocial',
+      database: 'doulado',
       user: 'postgres',
       password: "password",
     },

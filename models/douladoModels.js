@@ -17,7 +17,7 @@ class doulaModels {
   }
 
   static async getAllPost() {
-    const sql = "SELECT posts.*, users.first_name, users.last_name FROM posts JOIN users ON posts.user_id = users.id ORDER BY true DESC";
+    const sql = "SELECT posts.*, users.first_name, users.last_name FROM posts JOIN users ON posts.user_id = users.id ORDER BY created_at DESC";
     const dbResults = await pool.query(sql);
     return dbResults.rows;
   }
@@ -30,7 +30,11 @@ class doulaModels {
     return dbResults.rows;
   }
 
+  static getPost = (id) => db.select().from('posts').where({id});
 
+  static updatePost = (id, content) => db('posts').update({content}).where({id}).returning(['id', 'content']);
+
+  static deletePost = (id) => db.select().from('posts').where({id}).del();
 }
 
 module.exports = doulaModels;

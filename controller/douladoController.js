@@ -29,7 +29,7 @@ async function fetchUsers(req, res) {
   }
 }
 
-async function fetchPost(req, res) {
+async function fetchPosts(req, res) {
     try {
       const data = await doulaModels.getAllPost();
       res.json({
@@ -66,12 +66,37 @@ async function fetchPost(req, res) {
     }
   }
 
-  
+  const getPost = async (req, res) => {
+    const id = req.params.id;
+    const singlePost = await doulaModels.getPost(id);
+    if (singlePost.length === 0) return res.status(404).send('Does not exist');
+    res.status(200).send(singlePost[0]);
+  }
 
+  const updatePost = async (req, res) => {
+    const id = req.params.id;
+    const {content} = req.body;
+    if (!content) return res.status(404).send('Content does not exist');
+    const update = await doulaModels.updatePost(id, content);
+    if (update.length === 0) return res.status(404).send('Post does not exist');
+    res.status(201).send(update[0]);
+  }
+
+  const deletePost = async (req, res) => {
+    const id = req.params.id;
+    const findPost = doulaModels.getPost(id);
+    if (findPost.length === 0) return res.status(404).send('Post does not exist');
+    await doulaModels.deletePost(id);
+    const updatedPostList = await doulaModels.getAllPost();
+    res.status(202).send(updatedPostList);
+  }
 
 module.exports = {
     fetchUsers,
-    fetchPost,
+    fetchPosts,
     makeAPost,
-    userLogin
+    userLogin,
+    updatePost,
+    getPost,
+    deletePost
 }
