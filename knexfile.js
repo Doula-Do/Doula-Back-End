@@ -5,10 +5,10 @@
  */
 module.exports = {
   development: {
-    client: 'postgres',
+    client: 'postgresql',
     connection: {
-      database: 'doulasocial',
-      user:     'doulado',
+      database: 'doulado',
+      user:     'postgres',
       password: 'password'
     },
     pool: {

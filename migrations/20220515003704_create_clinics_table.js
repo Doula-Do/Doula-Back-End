@@ -9,7 +9,7 @@ exports.up = function(knex) {
         table.string('clinic_name').nullable;
         table.integer('phone_number').nullable;
         table.string('address').nullable;
-        table.integer('zipcode').references('zipcode').inTable('users');
+        table.integer('zipcode').nullable;
     });
 };
 

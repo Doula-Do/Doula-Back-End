@@ -27,8 +27,6 @@ exports.up = function(knex) {
         table.string('doula_type').nullable();
         table.boolean('doula_self_employed').nullable();
         table.string('doula_skillset').notNullable();
-
-
     });
 };
 

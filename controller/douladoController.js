@@ -1,19 +1,18 @@
 const doulaModels = require('../models/douladoModels');
-const pool = require("../db/db");
 
-// async function fetchUserLogin(req, res) {
-//   try {
-//     const data = await doulaModels.loginUser();
-//     res.json({
-//       data,
-//     });
-//   } catch (err) {
-//     res.status(500);
-//     res.json({
-//       message: "wrong email/password",
-//     });
-//   }
-// }
+async function userLogin(req, res) {
+  try {
+    const data = await doulaModels.loginUser();
+    res.status(200).json({
+      data,
+    });
+  } catch (err) {
+    res.status(404);
+    res.json({
+      message: "wrong email/password",
+    });
+  }
+}
 
 
 async function fetchUsers(req, res) {
@@ -52,12 +51,12 @@ async function fetchPost(req, res) {
       });
     }
     try {
-      const todo = await doulaModels.createAPost({
+      const post = await doulaModels.createAPost({
         user_id: user_id,
         content: content,
       });
       res.status(201).json({
-      todo,
+      post,
       });
     } catch (err) {
       res.statusCode = 500;
@@ -67,10 +66,12 @@ async function fetchPost(req, res) {
     }
   }
 
+  
 
 
 module.exports = {
     fetchUsers,
     fetchPost,
-    makeAPost
+    makeAPost,
+    userLogin
 }
