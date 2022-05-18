@@ -87,8 +87,7 @@ async function fetchPosts(req, res) {
     const findPost = doulaModels.getPost(id);
     if (findPost.length === 0) return res.status(404).send('Post does not exist');
     await doulaModels.deletePost(id);
-    const updatedPostList = await doulaModels.getAllPost();
-    res.status(202).send(updatedPostList);
+    res.status(202).send(findPost);
   }
 
 module.exports = {
