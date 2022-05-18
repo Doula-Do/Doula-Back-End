@@ -32,7 +32,7 @@ class doulaModels {
 
   static getPost = (id) => db.select().from('posts').where({id});
 
-  static updatePost = (id, content) => db('posts').update({content}).where({id}).returning(['id', 'content']);
+  static updatePost = (id, content) => db('posts').update({content}).where({id}).returning("*");
 
   static deletePost = (id) => db.select().from('posts').where({id}).del();
 }
