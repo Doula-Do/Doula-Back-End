@@ -25,7 +25,7 @@ class doulaModels {
   static async createAPost(data) {
     const { user_id, content } = data;
     const sql =
-      "INSERT INTO posts (user_id, content ) VALUES ($1, $2) RETURNING user_id, content";
+      "INSERT INTO posts (user_id, content ) VALUES ($1, $2) RETURNING *";
     const dbResults = await pool.query(sql, [user_id,content]);
     return dbResults.rows;
   }

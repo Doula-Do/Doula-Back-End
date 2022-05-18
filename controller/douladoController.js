@@ -45,7 +45,7 @@ async function fetchPosts(req, res) {
 
   async function makeAPost(req, res) {
     const { user_id, content } = req.body;
-    if (!user_id && !content ) {
+    if (!user_id || !content ) {
       return res.status(400).json({
         message: "Make a post!!",
       });
@@ -55,7 +55,7 @@ async function fetchPosts(req, res) {
         user_id: user_id,
         content: content,
       });
-      res.status(201).json({
+      return res.status(201).json({
       post,
       });
     } catch (err) {
