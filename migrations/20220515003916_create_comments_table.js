@@ -6,11 +6,10 @@ exports.up = function(knex) {
     return knex.schema
     .createTable('comments', function (table) {
         table.increments();
-        table.integer('posts_id').notNullable().references('id').inTable('posts').onDelete('CASCADE').index();
-        table.integer('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').index();
+        table.integer('post_id').references('id').inTable('posts');
+        table.integer('user_id').references('id').inTable('users');
         table.text('content');
-        table.timestamp(true,true).defaultTo(knex.fn.now())
-        
+        table.timestamp("created_at").defaultTo(knex.fn.now());
     });
 };
 

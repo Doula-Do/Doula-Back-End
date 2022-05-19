@@ -35,6 +35,8 @@ class doulaModels {
   static updatePost = (id, content) => db('posts').update({content}).where({id}).returning("*");
 
   static deletePost = (id) => db.select().from('posts').where({id}).del();
+
+  static postComment = (post_id, user_id, content) => db('comments').insert({post_id, user_id, content}).returning("*");
 }
 
 module.exports = doulaModels;
