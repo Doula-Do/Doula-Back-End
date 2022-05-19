@@ -119,16 +119,6 @@ async function fetchPosts(req, res) {
     return res.status(201).json(commenting);
   }
 
-  const getAllComments = async (req, res) => {
-    const comments = await doulaModels.getComments();
-    return res.status(201).json(comments);
-  }
-
-  const deleteAComment = async (req, res) => {
-    const id = req.params.id;
-    await doulaModels.deleteComment(id);
-    return res.status(202).json('Deleted comment.');
-
   const findAllClinics = async (req, res) => {
     const foundClinics = await doulaModels.findClinics()
     return res.status(200).json(foundClinics);
@@ -143,9 +133,9 @@ module.exports = {
     getPost,
     deletePost,
     createComment,
-    getAllComments,
-    deleteAComment,
-    registerUser,
-    findAllClinics,
-
+<<<<<<< HEAD
+    registerUser
+=======
+    findAllClinics
+>>>>>>> 314d0fc7eec97a68d7ddec0dab8b2cf98f362e62
 }
