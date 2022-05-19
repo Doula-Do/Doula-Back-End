@@ -9,6 +9,26 @@ class doulaModels {
     return dbResults.rows
   }
 
+  static async registerUser (){
+    const {first_name,
+      last_name,
+      password,
+      email,
+      gender,
+      medicaid,
+     } =data
+    const sql = "INSERT INTO user WHERE first_name,last_name, password, email, gender, medicaid VALUES ($1,$2,$3,$4,$5,$6)RETURNING *"
+
+    const dbResults = await pool.query(sql, [first_name,
+      last_name,
+      password,
+      email,
+      gender,
+      medicaid,
+      ]);
+      return dbResults.rows;
+    
+  }
 
   static async getAllUsers() {
     const sql = "SELECT * from users";
@@ -41,6 +61,10 @@ class doulaModels {
   static getComments = () => db.select("comments.*","users.first_name", "users.last_name").from("comments").join("users", { "users.id": "comments.user_id" }).orderBy('created_at');
 
   static deleteComment = (id) => db.select().from('comments').where({id}).del();
+
+  //Clinics
+
+  static findClinics = () => db.select().from('clinic')
 }
 
 module.exports = doulaModels;

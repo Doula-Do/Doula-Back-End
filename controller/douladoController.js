@@ -15,6 +15,27 @@ async function userLogin(req, res) {
   }
 }
 
+async function registerUser(req,res){
+  try{
+    const id = req.params.id
+    const { first_name,
+      last_name,
+      password,
+      email,
+      gender,
+      medicaid} = req.body;
+    res.status(200).json({
+      data,
+    });
+  }catch(err ) {
+    res.status(404);
+      res.json({
+        message: "Successfully registered!!!!",
+    });
+  }
+  }
+
+
 
 async function fetchUsers(req, res) {
   try {
@@ -107,6 +128,10 @@ async function fetchPosts(req, res) {
     const id = req.params.id;
     await doulaModels.deleteComment(id);
     return res.status(202).json('Deleted comment.');
+
+  const findAllClinics = async (req, res) => {
+    const foundClinics = await doulaModels.findClinics()
+    return res.status(200).json(foundClinics);
   }
 
 module.exports = {
@@ -119,5 +144,8 @@ module.exports = {
     deletePost,
     createComment,
     getAllComments,
-    deleteAComment
+    deleteAComment,
+    registerUser,
+    findAllClinics,
+
 }

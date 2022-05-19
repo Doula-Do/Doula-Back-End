@@ -1,8 +1,11 @@
-const router = require('express').Router(); 
-const {fetchUsers, userLogin, fetchPosts, makeAPost, updatePost, getPost, deletePost, createComment, getAllComments, deleteAComment }  = require('../controller/douladoController');
+const router = require('express').Router();
+const {fetchUsers, userLogin, fetchPosts, makeAPost, updatePost, getPost, deletePost, createComment, getAllComments, deleteAComment, registerUser, findAllClinics }  = require('../controller/douladoController');
 
 //gets all users
 router.get('/users', fetchUsers);
+
+//Register users
+router.post('/register/:id', registerUser)
 
 //logs in
 router.post('/login', userLogin);
@@ -30,5 +33,9 @@ router.get('/comments', getAllComments);
 
 //delete a comment
 router.delete('/comment/:id', deleteAComment);
+
+//get All Clinics
+router.get('/clinics', findAllClinics);
+
 
 module.exports = router;

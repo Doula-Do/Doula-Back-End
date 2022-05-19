@@ -15,3 +15,5 @@
     {clinic_name: "Community Health Center of Richmond", latitude:"40.626394", longitude:"-74.077958", phone_number:"917-830-1200", address: "135 Canal St Suite #300, Staten Island, NY", zipcode:"10304"}
   ]);
 };
+
+//function - write a function that returns a clinic closest to a given users zipcode. 
