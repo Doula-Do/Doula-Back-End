@@ -35,8 +35,6 @@ async function registerUser(req,res){
   }
   }
 
-
-
 async function fetchUsers(req, res) {
   try {
     const data = await doulaModels.getAllUsers();
@@ -128,6 +126,7 @@ async function fetchPosts(req, res) {
     const id = req.params.id;
     await doulaModels.deleteComment(id);
     return res.status(202).json('Deleted comment.');
+  }
 
   const findAllClinics = async (req, res) => {
     const foundClinics = await doulaModels.findClinics()
@@ -135,17 +134,16 @@ async function fetchPosts(req, res) {
   }
 
 module.exports = {
-    fetchUsers,
-    fetchPosts,
-    makeAPost,
-    userLogin,
-    updatePost,
-    getPost,
-    deletePost,
-    createComment,
-    getAllComments,
-    deleteAComment,
-    registerUser,
-    findAllClinics,
-
+  fetchUsers,
+  userLogin,
+  fetchPosts,
+  makeAPost,
+  updatePost,
+  getPost,
+  deletePost,
+  createComment,
+  getAllComments,
+  deleteAComment,
+  registerUser,
+  findAllClinics,
 }
