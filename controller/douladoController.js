@@ -98,6 +98,11 @@ async function fetchPosts(req, res) {
     return res.status(201).json(commenting);
   }
 
+  const findAllClinics = async (req, res) => {
+    const foundClinics = await doulaModels.findClinics()
+    return res.status(200).json(foundClinics);
+  }
+
 module.exports = {
     fetchUsers,
     fetchPosts,
@@ -106,5 +111,6 @@ module.exports = {
     updatePost,
     getPost,
     deletePost,
-    createComment
+    createComment,
+    findAllClinics
 }
