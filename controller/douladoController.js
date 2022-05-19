@@ -1,3 +1,4 @@
+const db = require('../db/db');
 const doulaModels = require('../models/douladoModels');
 
 async function userLogin(req, res) {
@@ -70,7 +71,7 @@ async function fetchPosts(req, res) {
     const id = req.params.id;
     const singlePost = await doulaModels.getPost(id);
     if (singlePost.length === 0) return res.status(404).send('Does not exist');
-    res.status(200).send(singlePost[0]);
+    return res.status(200).json(singlePost[0]);
   }
 
   const updatePost = async (req, res) => {
@@ -79,7 +80,7 @@ async function fetchPosts(req, res) {
     if (!content) return res.status(404).send('Content does not exist');
     const update = await doulaModels.updatePost(id, content);
     if (update.length === 0) return res.status(404).send('Post does not exist');
-    res.status(201).send(update[0]);
+    return res.status(201).json(update[0]);
   }
 
   const deletePost = async (req, res) => {
@@ -87,7 +88,14 @@ async function fetchPosts(req, res) {
     const findPost = await doulaModels.getPost(id);
     if (findPost.length === 0) return res.status(404).send('Post does not exist');
     await doulaModels.deletePost(id);
-    res.status(202).send(findPost);
+    return res.status(202).json(findPost);
+  }
+
+  const createComment = async (req, res) => {
+    const post_id = req.params.id
+    const {user_id, content} = req.body;
+    const commenting = await doulaModels.postComment(post_id, user_id, content);
+    return res.status(201).json(commenting);
   }
 
 module.exports = {
@@ -97,5 +105,6 @@ module.exports = {
     userLogin,
     updatePost,
     getPost,
-    deletePost
+    deletePost,
+    createComment
 }
