@@ -1,15 +1,11 @@
 const router = require('express').Router(); 
-<<<<<<< HEAD
-const {fetchUsers, userLogin, fetchPosts, makeAPost, updatePost, getPost, deletePost, createComment,registerUser }  = require('../controller/douladoController');
-=======
-const {fetchUsers, userLogin, fetchPosts, makeAPost, updatePost, getPost, deletePost, createComment, findAllClinics }  = require('../controller/douladoController');
->>>>>>> 314d0fc7eec97a68d7ddec0dab8b2cf98f362e62
+const {fetchUsers, userLogin, fetchPosts, makeAPost, updatePost, getPost, deletePost, createComment, registerUser, findAllClinics }  = require('../controller/douladoController');
 
 //gets all users
 router.get('/users', fetchUsers);
 
 //Register users
-router.post('/register/:id', registerUser)
+router.post('/users/:id', registerUser)
 
 //logs in
 router.post('/login', userLogin);

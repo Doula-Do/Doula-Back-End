@@ -15,23 +15,29 @@ async function userLogin(req, res) {
   }
 }
 
+
 async function registerUser(req,res){
-  try{
-    const id = req.params.id
-    const { first_name,
-      last_name,
-      password,
-      email,
-      gender,
-      medicaid} = req.body;
-    res.status(200).json({
-      data,
-    });
-  }catch(err ) {
-    res.status(404);
-      res.json({
-        message: "Successfully registered!!!!",
-    });
+  const {first_name,
+          last_name,
+          password,
+          email,
+          gender,
+          medicaid} = req.body
+  if(!first_name && !last_name && !password && !email && !gender && medicaid) {
+       return res.status(400).json({
+       message: 'Your credentials are required'
+  })
+  }
+  try {
+  const userData = await doulaModels.registerUser({first_name:first_name, last_name:last_name, password:password, email:email, gender:gender, medicaid:medicaid})
+  
+  res.status(201).json({
+      data:userData
+  })
+  }catch (err) {
+       res.status(201).json({
+       message:err.message
+   })
   }
   }
 
@@ -133,9 +139,6 @@ module.exports = {
     getPost,
     deletePost,
     createComment,
-<<<<<<< HEAD
+    findAllClinics,
     registerUser
-=======
-    findAllClinics
->>>>>>> 314d0fc7eec97a68d7ddec0dab8b2cf98f362e62
 }

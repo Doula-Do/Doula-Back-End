@@ -8,7 +8,7 @@ exports.up = function(knex) {
         table.increments();
         table.string('first_name').notNullable();
         table.string('last_name').notNullable();
-        table.date('birthday').notNullable();
+        table.date('birthday').nullable();
         table.string('password').notNullable();
         table.string('email').notNullable();
         table.string('Partner_first_name').nullable();
@@ -16,7 +16,7 @@ exports.up = function(knex) {
         table.string('gender').notNullable();
         table.boolean('medicaid').notNullable();
         table.integer('zipcode')
-        table.boolean('is_doula').notNullable();
+        table.boolean('is_doula').nullable();
         table.string('phone_number');
         table.boolean('need_Doula').nullable();
         table.string('birth_preference').nullable();
@@ -26,7 +26,7 @@ exports.up = function(knex) {
         table.string('doula_experience');
         table.string('doula_type').nullable();
         table.boolean('doula_self_employed').nullable();
-        table.string('doula_skillset').notNullable();
+        table.string('doula_skillset').nullable();
     });
 };
 
