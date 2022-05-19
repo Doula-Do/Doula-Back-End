@@ -15,6 +15,27 @@ async function userLogin(req, res) {
   }
 }
 
+async function registerUser(req,res){
+  try{
+    const id = req.params.id
+    const { first_name,
+      last_name,
+      password,
+      email,
+      gender,
+      medicaid} = req.body;
+    res.status(200).json({
+      data,
+    });
+  }catch(err ) {
+    res.status(404);
+      res.json({
+        message: "Successfully registered!!!!",
+    });
+  }
+  }
+
+
 
 async function fetchUsers(req, res) {
   try {
@@ -106,5 +127,6 @@ module.exports = {
     updatePost,
     getPost,
     deletePost,
-    createComment
+    createComment,
+    registerUser
 }
