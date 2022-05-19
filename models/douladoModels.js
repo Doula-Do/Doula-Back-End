@@ -58,6 +58,10 @@ class doulaModels {
 
   static postComment = (post_id, user_id, content) => db('comments').insert({post_id, user_id, content}).returning("*");
 
+  static getComments = () => db.select("comments.*","users.first_name", "users.last_name").from("comments").join("users", { "users.id": "comments.user_id" }).orderBy('created_at');
+
+  static deleteComment = (id) => db.select().from('comments').where({id}).del();
+
   //Clinics
 
   static findClinics = () => db.select().from('clinic')
