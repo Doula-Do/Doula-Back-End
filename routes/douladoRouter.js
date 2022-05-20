@@ -8,7 +8,7 @@ const {
   getPost,
   deletePost,
   createComment,
-  getAllComments,
+  getAllPostComments,
   deleteAComment,
   registerUser,
   findAllClinics,
@@ -41,8 +41,8 @@ router.delete("/post/:id", deletePost);
 //create a comment
 router.post("/post/:id/comment", createComment);
 
-//get all comments
-router.get("/comments", getAllComments);
+//get all post comments
+router.get("/post/:id/comments", getAllPostComments);
 
 //delete a comment
 router.delete("/comment/:id", deleteAComment);
