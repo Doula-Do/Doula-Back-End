@@ -13,6 +13,7 @@
         table.string('phone_number').nullable;
         table.string('address').nullable;
         table.integer('zipcode').nullable;
+        table.string('service_areas').nullable
     });
 };
 
