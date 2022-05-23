@@ -134,6 +134,13 @@ async function fetchPosts(req, res) {
     return res.status(202).json('Deleted comment.');
   }
 
+  const getSingleUser = async (req, res) => {
+    const id = req.params.id;
+    const user = await doulaModels.getUser(id);
+    if (!user.length) return res.status(404).send('User does not exist');
+    return res.status(200).json(user); 
+  }
+
   const findAllClinics = async (req, res) => {
     const foundClinics = await doulaModels.findClinics()
     return res.status(200).json(foundClinics);
@@ -152,4 +159,5 @@ module.exports = {
   deleteAComment,
   registerUser,
   findAllClinics,
+  getSingleUser,
 }

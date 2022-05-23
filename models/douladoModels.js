@@ -64,6 +64,8 @@ class doulaModels {
 
   static deleteComment = (id) => db.select().from('comments').where({id}).del();
 
+  static getUser = (id) => db.select().from('users').where({id});
+
   //Clinics
 
   static findClinics = () => db.select().from('clinic')

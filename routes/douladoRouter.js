@@ -13,10 +13,14 @@ const {
   deleteAComment,
   registerUser,
   findAllClinics,
+  getSingleUser,
 } = require("../controller/douladoController");
 
 //gets all users
 router.get("/users", fetchUsers);
+
+//get single user
+router.get('/user/:id', getSingleUser);
 
 //Register users
 router.post('/users/:id', registerUser)
