@@ -137,7 +137,7 @@ async function fetchPosts(req, res) {
   const getSingleUser = async (req, res) => {
     const id = req.params.id;
     const user = await doulaModels.getUser(id);
-    if (!user.length) return res.status(404).send('User does not exist');
+    if (user.length === 0) return res.status(404).send('User does not exist');
     return res.status(200).json(user); 
   }
 
