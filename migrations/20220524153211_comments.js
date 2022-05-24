@@ -8,7 +8,7 @@ exports.up = function(knex) {
         table.increments();
         table.integer('post_id').references('id').inTable('posts');
         table.integer('user_id').references('id').inTable('users');
-        table.text('content');
+        table.text('content').nullable;
         table.timestamp("created_at").defaultTo(knex.fn.now());
     });
 };
