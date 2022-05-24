@@ -2,11 +2,11 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
- exports.up = function(knex) {
+exports.up = function(knex) {
     return knex.schema
     .createTable('clinic', function (table) {
         table.increments();
-        table.integer('user_id').references('id').inTable('users')
+        table.integer('user_id').references('id').inTable('users');
         table.string('clinic_name').nullable;
         table.float('latitude').notNullable;
         table.float('longitude').notNullable
@@ -22,5 +22,5 @@
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-    return knex.schema.dropTable('clinic');
-}
+    return knex.schema.dropTable('clinics');
+};

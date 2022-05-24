@@ -7,9 +7,9 @@ module.exports = {
   development: {
     client: 'postgres',
     connection: {
-      database: 'doulado',
-      user: 'postgres',
-      password: "",
+      database: 'doulasocial',
+      user: 'doulado',
+      password: "password",
     },
     pool: {
       min: 2,
