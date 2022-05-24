@@ -39,7 +39,7 @@ class doulaModels {
   }
 
   static async getAllPost() {
-    const sql = "SELECT posts.*, users.first_name, users.last_name FROM posts JOIN users ON posts.user_id = users.id ORDER BY created_at DESC";
+    const sql = "SELECT posts.*, users.first_name, users.last_name, users.is_doula FROM posts JOIN users ON posts.user_id = users.id ORDER BY created_at DESC";
     const dbResults = await pool.query(sql);
     return dbResults.rows;
   }
@@ -60,7 +60,7 @@ class doulaModels {
 
   static postComment = (post_id, user_id, content) => db('comments').insert({post_id, user_id, content}).returning("*");
 
-  static getComments = () => db.select("comments.*","users.first_name", "users.last_name").from("comments").join("users", { "users.id": "comments.user_id" }).orderBy('created_at');
+  static getComments = () => db.select("comments.*","users.first_name", "users.last_name","users.is_doula").from("comments").join("users", { "users.id": "comments.user_id" }).orderBy('created_at');
 
   static deleteComment = (id) => db.select().from('comments').where({id}).del();
 
