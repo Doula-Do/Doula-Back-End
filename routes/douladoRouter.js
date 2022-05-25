@@ -13,6 +13,7 @@ const {
   registerUser,
   findAllClinics,
   getSingleUser,
+  authenticateUser,
 } = require("../controller/douladoController");
 
 //gets all users
@@ -23,6 +24,9 @@ router.get('/user/:id', getSingleUser);
 
 //Register users
 router.post('/register', registerUser);
+
+//authenticate JWT
+router.post('/authenticate', authenticateUser)
 
 //logs in
 router.post("/login", login);

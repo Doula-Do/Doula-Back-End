@@ -1,7 +1,7 @@
 const pool = require("../db/db_pool");
 const doulaModels = require('../models/douladoModels');
 const bcrypt = require('bcrypt');
-const { generateToken } = require('../utils');
+const { generateToken, verifyToken } = require('../utils');
 const saltRounds = 10;
 
 async function login(req, res) {
@@ -29,6 +29,18 @@ async function login(req, res) {
       res.status(500).json({
           message: err.message
       })
+  }
+}
+
+async function authenticateUser (req, res) {
+  try{
+    const {userToken} = req.body;
+    if (!userToken) return res.status(500).json({message: "Not authenticated"});
+    const verify = await verifyToken(userToken, "shhhhhhhhhhh");
+    return res.status(200).json({isAuth:true});
+  }
+  catch (err) {
+    return res.status(500).json({message: err.message});
   }
 }
 
@@ -179,4 +191,5 @@ module.exports = {
   registerUser,
   findAllClinics,
   getSingleUser,
+  authenticateUser,
 }
