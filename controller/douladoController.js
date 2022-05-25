@@ -41,6 +41,40 @@ async function registerUser(req,res){
   }
   }
 
+  async function updateprofile(req,res){
+    try{
+        const userId = req.params.id
+        const {
+          first_name,
+          last_name,
+          password,
+          email,
+          gender,
+          medicaid} = req.body
+        const user = await doulaModels.find(userId)
+
+        if(!user){
+            res.status(200).json({
+                message: 'Could not find the user with id ${userId}'
+            })
+        }
+     const userUpdate = await doulaModels.update(userId, 
+      { first_name,
+      last_name,
+      password,
+      email,
+      gender,
+      medicaid})
+     return res.json({
+         data: userId
+     });
+    }catch(err){
+         res.status(200).json({
+            message:err.message
+        })
+    }
+}
+
 async function fetchUsers(req, res) {
   try {
     const data = await doulaModels.getAllUsers();
@@ -160,4 +194,5 @@ module.exports = {
   registerUser,
   findAllClinics,
   getSingleUser,
+  updateprofile
 }

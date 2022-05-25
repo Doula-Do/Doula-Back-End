@@ -32,6 +32,41 @@ class doulaModels {
     
   }
 
+  static async find(id){
+    if(!id) throw new Error(`an id is required`);
+    const sql = `SELECT * FROM users where id = $1`;
+    const dbResult = await pool.query(sql, [id])
+    return dbResult.rows[0]
+}
+
+static async update(id, data){
+  const {
+    first_name,
+    last_name,
+    password,
+    email,
+    gender,
+    medicaid,
+  } = data
+  if(!id) throw new Error(`an id is required`)
+  const sql = `Update users SET (
+    first_name,
+    last_name,
+    password,
+    email,
+    gender,
+    medicaid,) = $1 where id = $2 returning *`;
+  const dbResult = await pool.query(sql, [ 
+    first_name,
+    last_name,
+    password,
+    email,
+    gender,
+    medicaid,
+    id])
+  return dbResult.rows[0]
+}
+
   static async getAllUsers() {
     const sql = "SELECT * from users";
     const dbResults = await pool.query(sql);

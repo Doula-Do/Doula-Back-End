@@ -14,6 +14,7 @@ const {
   registerUser,
   findAllClinics,
   getSingleUser,
+  updateprofile
 } = require("../controller/douladoController");
 
 //gets all users
@@ -24,7 +25,9 @@ router.get('/user/:id', getSingleUser);
 
 //Register users
 router.post('/users/:id', registerUser)
+//Updating a profile
 
+router.put('/users/updateprofile', updateprofile )
 //logs in
 router.post("/login", userLogin);
 
