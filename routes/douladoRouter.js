@@ -9,7 +9,6 @@ const {
   deletePost,
   createComment,
   getAllComments,
-  getAllPostComments,
   deleteAComment,
   registerUser,
   findAllClinics,

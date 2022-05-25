@@ -1,4 +1,4 @@
-const db = require('../db/db');
+const pool = require("../db/db_pool");
 const doulaModels = require('../models/douladoModels');
 const bcrypt = require('bcrypt');
 const { generateToken } = require('../utils');
@@ -47,7 +47,7 @@ async function registerUser(req, res){
   })
   }
   try {
-  const userData = await doulaModels.registerUser({first_name:first_name, last_name:last_name, password:password, email:email, gender:gender, medicaid:medicaid})
+  const userData = await doulaModels.registerUser({first_name:first_name, last_name:last_name, password:hashedPassword, email:email, gender:gender, medicaid:medicaid})
   const token = await generateToken(userData.user_id);
   res.status(201).json({
       data:userData,
