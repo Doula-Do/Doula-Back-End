@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const {
   fetchUsers,
-  userLogin,
+  login,
   fetchPosts,
   makeAPost,
   updatePost,
@@ -23,10 +23,10 @@ router.get("/users", fetchUsers);
 router.get('/user/:id', getSingleUser);
 
 //Register users
-router.post('/users/:id', registerUser)
+router.post('/register', registerUser);
 
 //logs in
-router.post("/login", userLogin);
+router.post("/login", login);
 
 //gets all posts
 router.get("/posts", fetchPosts);

@@ -14,7 +14,7 @@ exports.up = function(knex) {
         table.string('password')
         table.string('gender')
         table.boolean('medicaid').notNullable();
-        table.boolean('is_doula').notNullable();
+        table.boolean('is_doula').notNullable().defaultTo(false);
         table.string('doula_skillset')
 
        

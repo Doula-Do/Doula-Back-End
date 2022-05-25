@@ -2,13 +2,6 @@ const db = require("../db/db");
 const pool = require("../db/db_pool");
 
 class doulaModels {
-
-  static async loginUser (){
-    const sql = "SELECT * FROM users WHERE email = $1 AND password = $2"
-    const dbResults = await pool.query(sql, [email, password])
-    return dbResults.rows
-  }
-
   static async registerUser (data){
     const {
       first_name,

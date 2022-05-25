@@ -1,28 +1,46 @@
 const db = require('../db/db');
 const doulaModels = require('../models/douladoModels');
+const bcrypt = require('bcrypt');
+const { generateToken } = require('../utils');
+const saltRounds = 10;
 
-async function userLogin(req, res) {
+async function login(req, res) {
   try {
-    const data = await doulaModels.loginUser();
-    res.status(200).json({
-      data,
-    });
+      const { email, password } = req.body;
+      const user = await (await pool.query("SELECT * FROM users WHERE email = ($1)", [email])).rows[0];
+      if (!user) {
+          return res.status(401).json({
+              message: "You sure you have the right email?",
+          });
+      }
+      const passwordCorrect = await bcrypt.compare(password, user.password);
+      if (!passwordCorrect) {
+          return res.status(401).json({
+              message: "You sure you have the right password?",
+          });
+      }
+      const token = await generateToken(user.user_id);
+      return res.status(200).json({
+          user,
+          token
+      });
+
   } catch (err) {
-    res.status(404);
-    res.json({
-      message: "wrong email/password",
-    });
+      res.status(500).json({
+          message: err.message
+      })
   }
 }
 
 
-async function registerUser(req,res){
+async function registerUser(req, res){
   const {first_name,
           last_name,
           password,
           email,
           gender,
           medicaid} = req.body
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
   if(!first_name && !last_name && !password && !email && !gender && medicaid) {
        return res.status(400).json({
        message: 'Your credentials are required'
@@ -30,9 +48,10 @@ async function registerUser(req,res){
   }
   try {
   const userData = await doulaModels.registerUser({first_name:first_name, last_name:last_name, password:password, email:email, gender:gender, medicaid:medicaid})
-  
+  const token = await generateToken(userData.user_id);
   res.status(201).json({
-      data:userData
+      data:userData,
+      token
   })
   }catch (err) {
        res.status(201).json({
@@ -148,7 +167,7 @@ async function fetchPosts(req, res) {
 
 module.exports = {
   fetchUsers,
-  userLogin,
+  login,
   fetchPosts,
   makeAPost,
   updatePost,
