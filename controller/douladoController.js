@@ -48,18 +48,19 @@ async function authenticateUser (req, res) {
 async function registerUser(req, res){
   const {first_name,
           last_name,
-          password,
           email,
+          password,
           gender,
-          medicaid} = req.body
+          medicaid,
+          is_doula} = req.body
   const hashedPassword = await bcrypt.hash(password, saltRounds);
-  if(!first_name && !last_name && !password && !email && !gender && medicaid) {
+  if(!first_name && !last_name && !password && !email && !gender && medicaid && is_doula) {
        return res.status(400).json({
        message: 'Your credentials are required'
   })
   }
   try {
-  const userData = await doulaModels.registerUser({first_name:first_name, last_name:last_name, password:hashedPassword, email:email, gender:gender, medicaid:medicaid})
+  const userData = await doulaModels.registerUser({first_name:first_name, last_name:last_name, password:hashedPassword, email:email, gender:gender, medicaid:medicaid, is_doula: is_doula})
   const token = await generateToken(userData.user_id);
   res.status(201).json({
       data:userData,
@@ -172,6 +173,13 @@ async function fetchPosts(req, res) {
     return res.status(200).json(user); 
   }
 
+  const updateUserProfile = async (req, res) => {
+    const id = req.params.id;
+    const {first_name, last_name, birthday, phone_number, medicaid, email, doula_skillset} = req.body;
+    const updatedUser = await doulaModels.updateUser(id, first_name, last_name, birthday, phone_number, medicaid, email, doula_skillset);
+    return res.status(201).json(updatedUser)
+  }
+
   const findAllClinics = async (req, res) => {
     const foundClinics = await doulaModels.findClinics()
     return res.status(200).json(foundClinics);
@@ -192,4 +200,5 @@ module.exports = {
   findAllClinics,
   getSingleUser,
   authenticateUser,
+  updateUserProfile
 }

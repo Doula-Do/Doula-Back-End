@@ -10,8 +10,9 @@ class doulaModels {
       email,
       gender,
       medicaid,
+      is_doula,
      } = data
-    const sql = "INSERT INTO users (first_name, last_name, password, email, gender, medicaid) VALUES ( $1, $2, $3, $4, $5, $6) RETURNING *"
+    const sql = "INSERT INTO users (first_name, last_name, password, email, gender, medicaid, is_doula) VALUES ( $1, $2, $3, $4, $5, $6, $7) RETURNING *"
 
     const dbResults = await pool.query(sql, [
       first_name,
@@ -20,9 +21,9 @@ class doulaModels {
       email,
       gender,
       medicaid,
+      is_doula
       ]);
       return dbResults.rows;
-    
   }
 
   static async getAllUsers() {
@@ -58,6 +59,8 @@ class doulaModels {
   static deleteComment = (id) => db.select().from('comments').where({id}).del();
 
   static getUser = (id) => db.select().from('users').where({id});
+
+  static updateUser = (id, first_name, last_name, birthday, phone_number, medicaid, email, doula_skillset) => db('users').update({first_name, last_name, birthday, phone_number, medicaid, email, doula_skillset}).where({id}).returning('*');
 
   //Clinics
 
