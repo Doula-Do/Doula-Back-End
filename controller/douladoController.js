@@ -176,7 +176,7 @@ async function fetchPosts(req, res) {
   const updateUserProfile = async (req, res) => {
     const id = req.params.id;
     const {first_name, last_name, birthday, phone_number, medicaid, email, doula_skillset} = req.body;
-    const updatedUser = await doulaModels.updateUser(id, first_name, last_name, birthday, phone_number, medicaid, email, doula_skillset);
+    const updatedUser = await doulaModels.updateUser(id, first_name, last_name, birthday, phone_number, medicaid, email , doula_skillset);
     return res.status(201).json(updatedUser)
   }
 
